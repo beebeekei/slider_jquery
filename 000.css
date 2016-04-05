@@ -3,3 +3,84 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+.wrapper {
+    margin: 0 auto;
+    width: 960px;
+}
+
+/* Slider styles */
+.jq_slider {
+    height: 600px; /* TODO */
+    position: relative;
+    width: 800px; /* TODO */
+}
+
+.jq_slider_images_wrapper {
+    overflow: hidden;
+}
+
+.jq_slider_images {
+    font-size: 0;
+    width: 3200px; /* TODO */
+}
+
+.jq_slider_images li {
+    display: inline-block;
+}
+
+.jq_slider_images img {
+    vertical-align: middle;
+}
+
+.jq_slider_navigation_prev,
+.jq_slider_navigation_next {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    height: 81px;
+    margin-top: -40px; /* TODO */
+    position: absolute;
+    text-indent: -9999px;
+    top: 50%;
+    width: 44px;
+}
+
+.jq_slider_navigation_prev {
+    background-image: url('1459878927_ChirstmaxShop_left.png');
+    left: 5px;
+}
+
+.jq_slider_navigation_next {
+    background-image: url('1459878909_ChirstmaxShop_right.png');
+    right: 5px;
+}
+
+.jq_slider_pagination {
+    bottom: 8px;
+    font-size: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+
+.jq_slider_pagination li {
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.jq_slider_pagination li+li {
+    margin-left: 8px;
+}
+
+.jq_slider_pagination_dot {
+    background: #000;
+    border: 1px solid #FFF;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    height: 12px;
+    text-indent: -9999px;
+    width: 12px;
+}
