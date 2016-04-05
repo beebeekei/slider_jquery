@@ -1,4 +1,4 @@
-$( window ).load(function() {
+$(window).load(function() {
     // http://stackoverflow.com/a/2335554/3841259
     var sliderWidth = 0;
     $('.jq_slider_images img').each(function() { sliderWidth += $(this).width(); });
