@@ -3,10 +3,8 @@ var sliderWidth = 0;
 $('.jq_slider_images img').each(function() { sliderWidth += $(this).width(); });
 $('.jq_slider_images').width(sliderWidth);
 
-var sliderPosition = 0;
+var sliderPosition = 0; //start position
 var sliderLastChildWidth = $('.jq_slider_images li:last-child').width();
-
-
 
 $('.jq_slider_navigation_prev').click(function() {
     sliderPosition = sliderPosition + 800;

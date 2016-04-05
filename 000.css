@@ -22,7 +22,7 @@
 
 .jq_slider_images {
     font-size: 0;
-    transition: all 0.15s linear 0s;
+    transition: all 0.2s linear 0s;
 }
 
 .jq_slider_images li {
@@ -47,12 +47,12 @@
 }
 
 .jq_slider_navigation_prev {
-    background-image: url('1459878927_ChirstmaxShop_left.png');
+    background-image: url('http://image.prntscr.com/image/775af55569b742b9bbf91de52ccb0a58.png');
     left: 5px;
 }
 
 .jq_slider_navigation_next {
-    background-image: url('1459878909_ChirstmaxShop_right.png');
+    background-image: url('http://image.prntscr.com/image/44f71c995b184e388d745061f078d855.png');
     right: 5px;
 }
 
