@@ -22,7 +22,7 @@
 
 .jq_slider_images {
     font-size: 0;
-    width: 3200px; /* TODO */
+    transition: all 0.15s linear 0s;
 }
 
 .jq_slider_images li {
@@ -83,4 +83,8 @@
     height: 12px;
     text-indent: -9999px;
     width: 12px;
+}
+
+.jq_slider_pagination_dot.active {
+    background: #AAA;
 }
