@@ -11,9 +11,8 @@
 
 /* Slider styles */
 .jq_slider {
-    height: 600px; /* TODO */
     position: relative;
-    width: 800px; /* TODO */
+    width: 800px; /* depending on images width - currently images should have the same width */
 }
 
 .jq_slider_images_wrapper {
@@ -22,7 +21,7 @@
 
 .jq_slider_images {
     font-size: 0;
-    transition: all 0.2s linear 0s;
+    transition: all 0.3s linear 0s;
 }
 
 .jq_slider_images li {
@@ -35,15 +34,23 @@
 
 .jq_slider_navigation_prev,
 .jq_slider_navigation_next {
+    background-color: rgba(222, 222, 222, 0.8);
     background-position: 50% 50%;
     background-repeat: no-repeat;
     cursor: pointer;
-    height: 81px;
+    height: 85px;
     margin-top: -40px; /* TODO */
+    opacity: 0.3;
     position: absolute;
     text-indent: -9999px;
     top: 50%;
-    width: 44px;
+    transition: all 0.2s linear 0s;
+    width: 50px;
+}
+
+.jq_slider_navigation_prev:hover,
+.jq_slider_navigation_next:hover {
+    opacity: 0.6;
 }
 
 .jq_slider_navigation_prev {
@@ -81,8 +88,14 @@
     cursor: pointer;
     display: inline-block;
     height: 12px;
+    opacity: 0.5;
     text-indent: -9999px;
+    transition: all 0.2s linear 0s;
     width: 12px;
+}
+
+.jq_slider_pagination_dot:hover {
+    opacity: 0.8;
 }
 
 .jq_slider_pagination_dot.active {
