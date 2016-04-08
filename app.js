@@ -1,0 +1,1 @@
+slderSettings.pagination = false;
