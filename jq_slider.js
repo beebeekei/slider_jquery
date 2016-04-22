@@ -4,7 +4,8 @@
         var settings = $.extend({
             pagination: true,
             autoScroll: false,
-            autoScrollSpeed: 2000
+            autoScrollSpeed: 2000,
+            perpetual: true
         }, options);
 
         return this.each(function() {
@@ -24,6 +25,7 @@
                 for (var i = 1; i < $('.jq_slider_images img').length; i++) {
                     paginationCoords[i] = paginationCoords[i - 1] - $($('.jq_slider_images img')[i - 1]).width();
                 }
+                $(this).append('<ul class="jq_slider_pagination"></ul>');
                 //adding pagination
                 for (var i = 0; i < $('.jq_slider_images img').length; i++) {
                     $('.jq_slider_pagination').append('<li><span class="jq_slider_pagination_dot">' + (i + 1) + '</span></li>');
@@ -33,6 +35,11 @@
             //autoscroll option
             if (settings.autoScroll) {
                 var autoScrollTimer = setInterval(function(){ nextSlide() }, settings.autoScrollSpeed);
+            }
+
+            //initial hide of prev button if slider is not perpetual
+            if (settings.perpetual == false && sliderPosition >= 0) {
+                $('.jq_slider_navigation_prev').hide();
             }
 
             //changing slide by clicking on pagination dots
@@ -56,6 +63,14 @@
                     $(".jq_slider_images").css('margin-left', sliderPosition);
                 }
 
+                if (settings.perpetual == false && sliderPosition >= 0) {
+                    $('.jq_slider_navigation_prev').hide();
+                }
+
+                if (settings.perpetual == false && sliderPosition > -(sliderWidth - sliderLastChildWidth)) {
+                    $('.jq_slider_navigation_next').show();
+                }
+
                 //making active pagination dot
                 if (settings.pagination) {
                     $('.jq_slider_pagination_dot.active').removeClass('active');
@@ -70,6 +85,14 @@
                     $(".jq_slider_images").css('margin-left', sliderPosition);
                 } else {
                     $(".jq_slider_images").css('margin-left', sliderPosition);
+                }
+
+                if (settings.perpetual == false && sliderPosition <= -(sliderWidth - sliderLastChildWidth)) {
+                    $('.jq_slider_navigation_next').hide();
+                }
+
+                if (settings.perpetual == false && sliderPosition < 0) {
+                    $('.jq_slider_navigation_prev').show();
                 }
 
                 //making active pagination dot
