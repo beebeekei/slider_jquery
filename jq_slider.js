@@ -2,6 +2,7 @@
 
     $.fn.jQ_Slider = function(options) {
         var settings = $.extend({
+            navigation: true,
             pagination: true,
             autoScroll: false,
             autoScrollSpeed: 2000,
@@ -16,6 +17,11 @@
 
             var sliderPosition = 0; //start position
             var sliderLastChildWidth = $('.jq_slider_images li:last-child').width();
+
+            //navigation option
+            if (settings.navigation) {
+                $(this).append('<ul class="jq_slider_navigation"><li><span class="jq_slider_navigation_prev">Previous</span></li><li><span class="jq_slider_navigation_next">Next</span></li></ul>');
+            }
 
             //pagination option
             if (settings.pagination) {
@@ -38,7 +44,7 @@
             }
 
             //initial hide of prev button if slider is not perpetual
-            if (settings.perpetual == false && sliderPosition >= 0) {
+            if (!settings.perpetual && sliderPosition >= 0 && settings.navigation) {
                 $('.jq_slider_navigation_prev').hide();
             }
 
@@ -63,11 +69,11 @@
                     $(".jq_slider_images").css('margin-left', sliderPosition);
                 }
 
-                if (settings.perpetual == false && sliderPosition >= 0) {
+                if (!settings.perpetual && sliderPosition >= 0 && settings.navigation) {
                     $('.jq_slider_navigation_prev').hide();
                 }
 
-                if (settings.perpetual == false && sliderPosition > -(sliderWidth - sliderLastChildWidth)) {
+                if (!settings.perpetual && sliderPosition > -(sliderWidth - sliderLastChildWidth) && settings.navigation) {
                     $('.jq_slider_navigation_next').show();
                 }
 
@@ -87,11 +93,11 @@
                     $(".jq_slider_images").css('margin-left', sliderPosition);
                 }
 
-                if (settings.perpetual == false && sliderPosition <= -(sliderWidth - sliderLastChildWidth)) {
+                if (!settings.perpetual && sliderPosition <= -(sliderWidth - sliderLastChildWidth) && settings.navigation) {
                     $('.jq_slider_navigation_next').hide();
                 }
 
-                if (settings.perpetual == false && sliderPosition < 0) {
+                if (!settings.perpetual && sliderPosition < 0 && settings.navigation) {
                     $('.jq_slider_navigation_prev').show();
                 }
 
