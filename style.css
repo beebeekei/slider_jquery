@@ -10,11 +10,6 @@
 }
 
 /* Slider styles */
-.jq_slider {
-    position: relative;
-    width: 800px; /* depending on images width - currently images should have the same width */
-}
-
 .jq_slider_images_wrapper {
     overflow: hidden;
 }

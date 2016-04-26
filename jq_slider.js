@@ -10,13 +10,22 @@
         }, options);
 
         return this.each(function() {
+            var $this = $(this);
+
             // http://stackoverflow.com/a/2335554/3841259
             var sliderWidth = 0;
             $('.jq_slider_images img').each(function() { sliderWidth += $(this).width(); });
             $('.jq_slider_images').width(sliderWidth);
 
             var sliderPosition = 0; //start position
-            var sliderLastChildWidth = $('.jq_slider_images li:last-child').width();
+            var firstImgWidth = $(this).find('.jq_slider_images img').width();
+            var lastImgWidth = $(this).find('.jq_slider_images li:last-child').width();
+
+            //adding styles no matter what class we use for silder
+            $(this).css({
+                position: 'relative',
+                width: firstImgWidth
+            });
 
             //navigation option
             if (settings.navigation) {
@@ -52,7 +61,7 @@
             $('.jq_slider_pagination_dot').each(function(index) {
                 $(this).click(function() {
                     sliderPosition = paginationCoords[index];
-                    $(".jq_slider_images").css('margin-left', paginationCoords[index]);
+                    $('.jq_slider_images').css('margin-left', paginationCoords[index]);
                 });
             }).click(function() {
                 $('.jq_slider_pagination_dot.active').removeClass('active');
@@ -63,17 +72,17 @@
             var prevSlide = function() {
                 sliderPosition += 800;
                 if (sliderPosition > 0) {
-                    sliderPosition = -(sliderWidth - sliderLastChildWidth);
-                    $(".jq_slider_images").css('margin-left', -(sliderWidth - sliderLastChildWidth));
+                    sliderPosition = -(sliderWidth - lastImgWidth);
+                    $('.jq_slider_images').css('margin-left', -(sliderWidth - lastImgWidth));
                 } else {
-                    $(".jq_slider_images").css('margin-left', sliderPosition);
+                    $('.jq_slider_images').css('margin-left', sliderPosition);
                 }
 
                 if (!settings.perpetual && sliderPosition >= 0 && settings.navigation) {
                     $('.jq_slider_navigation_prev').hide();
                 }
 
-                if (!settings.perpetual && sliderPosition > -(sliderWidth - sliderLastChildWidth) && settings.navigation) {
+                if (!settings.perpetual && sliderPosition > -(sliderWidth - lastImgWidth) && settings.navigation) {
                     $('.jq_slider_navigation_next').show();
                 }
 
@@ -86,14 +95,14 @@
             };
             var nextSlide = function() {
                 sliderPosition -= 800;
-                if (sliderPosition < -(sliderWidth - sliderLastChildWidth)) {
+                if (sliderPosition < -(sliderWidth - lastImgWidth)) {
                     sliderPosition = 0;
-                    $(".jq_slider_images").css('margin-left', sliderPosition);
+                    $('.jq_slider_images').css('margin-left', sliderPosition);
                 } else {
-                    $(".jq_slider_images").css('margin-left', sliderPosition);
+                    $('.jq_slider_images').css('margin-left', sliderPosition);
                 }
 
-                if (!settings.perpetual && sliderPosition <= -(sliderWidth - sliderLastChildWidth) && settings.navigation) {
+                if (!settings.perpetual && sliderPosition <= -(sliderWidth - lastImgWidth) && settings.navigation) {
                     $('.jq_slider_navigation_next').hide();
                 }
 
