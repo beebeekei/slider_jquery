@@ -10,11 +10,12 @@
         }, options);
 
         return this.each(function() {
+            // caching slider wrapper
             var $this = $(this);
 
             // http://stackoverflow.com/a/2335554/3841259
             var sliderWidth = 0;
-            $this.find('.jq_slider_images img').each(function() { sliderWidth += $(this).width(); }); //TODO - can't use $this variable
+            $this.find('.jq_slider_images img').each(function() { sliderWidth += $(this).width(); });
             $this.find('.jq_slider_images').width(sliderWidth);
 
             var sliderPosition = 0; //start position
@@ -59,13 +60,14 @@
 
             //changing slide by clicking on pagination dots
             $this.find('.jq_slider_pagination_dot').each(function(index) {
-                $(this).click(function() { //TODO - can't use $this variable
+                $(this).click(function() {
                     sliderPosition = paginationCoords[index];
                     $this.find('.jq_slider_images').css('margin-left', paginationCoords[index]);
+                    navigationButtonsAppear();
                 });
-            }).click(function() {
+            }).click(function() { // toggling class
                 $this.find('.jq_slider_pagination_dot.active').removeClass('active');
-                $(this).addClass('active'); //TODO - can't use $this variable
+                $(this).addClass('active');
             });
 
             //methods
@@ -75,6 +77,36 @@
                     $this.find('.jq_slider_pagination_dot.active').removeClass('active');
 
                     $($this.find('.jq_slider_pagination_dot')[paginationCoords.indexOf(sliderPosition)]).addClass('active');
+                }
+            }
+            //
+            function navigationButtonsAppear() {
+                // variables to keep position of slide status
+                var firstSlide, lastSlide;
+
+                if (sliderPosition < 0 && sliderPosition > -(sliderWidth - lastImgWidth)) {
+                    firstSlide = false;
+                    lastSlide = false;
+                } else if (sliderPosition >= 0) {
+                    firstSlide = true;
+                    lastSlide = false;
+                } else if (sliderPosition <= -(sliderWidth - lastImgWidth)) {
+                    firstSlide = false;
+                    lastSlide = true;
+                }
+
+                if (firstSlide) {
+                    $this.find('.jq_slider_navigation_prev').hide();
+                } else if (lastSlide) {
+                    $this.find('.jq_slider_navigation_next').hide();
+                }
+                // showing next button
+                if (!settings.perpetual && sliderPosition > -(sliderWidth - lastImgWidth) && settings.navigation) {
+                    $this.find('.jq_slider_navigation_next').show();
+                }
+                // showing prev button
+                if (!settings.perpetual && sliderPosition < 0 && settings.navigation) {
+                    $this.find('.jq_slider_navigation_prev').show();
                 }
             }
             function prevSlide() {
@@ -87,14 +119,8 @@
                 }
 
                 // hiding prev button on first slide (if perpetual: false)
-                if (!settings.perpetual && sliderPosition >= 0 && settings.navigation) {
-                    $this.find('.jq_slider_navigation_prev').hide();
-                }
+                navigationButtonsAppear();
 
-                // showing next button
-                if (!settings.perpetual && sliderPosition > -(sliderWidth - lastImgWidth) && settings.navigation) {
-                    $this.find('.jq_slider_navigation_next').show();
-                }
                 paginationActive();
             }
             function nextSlide() {
@@ -107,14 +133,8 @@
                 }
 
                 // hiding next button on last slide (if perpetual: false)
-                if (!settings.perpetual && sliderPosition <= -(sliderWidth - lastImgWidth) && settings.navigation) {
-                    $this.find('.jq_slider_navigation_next').hide();
-                }
+                navigationButtonsAppear();
 
-                // showing prev button
-                if (!settings.perpetual && sliderPosition < 0 && settings.navigation) {
-                    $this.find('.jq_slider_navigation_prev').show();
-                }
                 paginationActive();
             }
 
